@@ -2,6 +2,10 @@
 
 I decided to move away from hosting my website on Wordpress as well as my Medium account. You can find here all of the posts that I posted there over the past years and this is where I'll be posting additional content going forward in addition to my [Youtube channel](https://www.youtube.com/@pvillard31).
 
+## 2022
+
+- [What’s new in Cloudera Flow Management 2.1.3, based on Apache NiFi 1.15?](2022/2022-02-17-whats-new-in-cloudera-flow-management-2-1-3-based-on-apache-nifi-1-15/index.md)
+
 ## 2019
 
 - [Deploying NiFi workflows on Google Cloud Run](2019/2019-04-09-deploying-nifi-workflows-on-google-cloud-run/index.md)
