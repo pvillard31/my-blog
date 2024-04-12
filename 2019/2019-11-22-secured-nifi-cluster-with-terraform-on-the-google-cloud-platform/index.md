@@ -122,7 +122,11 @@ Once you have completed the above prerequisites, installing your NiFi cluster wi
 
 <figure>
 
-https://gist.github.com/pvillard31/d5677834b07c2ca0872beb6964d218b6
+````
+git clone https://github.com/pvillard31/nifi-gcp-terraform.git
+cd nifi-gcp-terraform/gcp-cluster-secured-nifi-oidc
+/bin/sh deploy.sh <gcp-project-id> <gcs-bucket>
+````
 
 <figcaption>
 
@@ -152,7 +156,109 @@ Here is what it looks like on my side (after updating the _variables.tf_ file):
 
 <figure>
 
-https://gist.github.com/pvillard31/e64b82e6443bed96318e5c174b5c1e5f
+````
+pvillard@cloudshell:~/nifi-gcp-terraform/gcp-cluster-secured-nifi-oidc (nifi-dev-project)$ /bin/sh deploy.sh nifi-dev-project nifi_bin
+Updated property [core/project].
+
+Initializing the backend...
+
+Initializing provider plugins...
+
+The following providers do not have any version constraints in configuration,
+so the latest version was installed.
+
+To prevent automatic upgrades to new major versions that may contain breaking
+changes, it is recommended to add version = "..." constraints to the
+corresponding provider blocks in configuration, with the constraint strings
+suggested below.
+
+* provider.google: version = "~> 2.13"
+
+Terraform has been successfully initialized!
+
+You may now begin working with Terraform. Try running "terraform plan" to see
+any changes that are required for your infrastructure. All Terraform commands
+should now work.
+
+If you ever set or change modules or backend configuration for Terraform,
+rerun this command to reinitialize your working directory. If you forget, other
+commands will detect it and remind you to do so if necessary.
+google_compute_network.default: Creating...
+google_compute_network.default: Still creating... [10s elapsed]
+google_compute_network.default: Creation complete after 17s [id=nifi-network]
+google_compute_subnetwork.default: Creating...
+google_compute_subnetwork.default: Still creating... [10s elapsed]
+google_compute_subnetwork.default: Creation complete after 18s [id=europe-west1/nifi-network]
+google_compute_instance.nifi-ca: Creating...
+google_compute_instance.nifi-ca: Still creating... [10s elapsed]
+google_compute_instance.nifi-ca: Creation complete after 10s [id=nifi-ca]
+
+Apply complete! Resources: 3 added, 0 changed, 0 destroyed.
+CommandException: One or more URLs matched no objects.
+... (waiting for Load Balancer certificates to be generated)
+CommandException: One or more URLs matched no objects.
+gs://nifi_bin/key.pem
+Copying gs://nifi_bin/key.pem...
+/ [1 files][  1.8 KiB/  1.8 KiB]
+Operation completed over 1 objects/1.8 KiB.
+Copying gs://nifi_bin/certs.pem...
+/ [1 files][  2.7 KiB/  2.7 KiB]
+Operation completed over 1 objects/2.7 KiB.
+google_compute_network.default: Refreshing state... [id=nifi-network]
+google_compute_subnetwork.default: Refreshing state... [id=europe-west1/nifi-network]
+google_compute_instance.nifi-ca: Refreshing state... [id=nifi-ca]
+google_compute_https_health_check.nifi-healthcheck: Creating...
+google_compute_firewall.allow-ssh: Creating...
+google_compute_firewall.allow-https: Creating...
+google_compute_ssl_certificate.nifi-lb-cert: Creating...
+google_compute_firewall.allow-internal: Creating...
+google_compute_instance.zookeeper: Creating...
+google_compute_https_health_check.nifi-healthcheck: Creation complete after 4s [id=nifi-healthcheck]
+google_compute_ssl_certificate.nifi-lb-cert: Creation complete after 5s [id=nifi-lb-cert]
+google_compute_firewall.allow-ssh: Creation complete after 9s [id=allow-ssh]
+google_compute_firewall.allow-https: Still creating... [10s elapsed]
+google_compute_firewall.allow-internal: Still creating... [10s elapsed]
+google_compute_instance.zookeeper: Still creating... [10s elapsed]
+google_compute_instance.zookeeper: Creation complete after 12s [id=zookeeper]
+google_compute_instance.nifi[4]: Creating...
+google_compute_instance.nifi[2]: Creating...
+google_compute_instance.nifi[0]: Creating...
+google_compute_instance.nifi[1]: Creating...
+google_compute_instance.nifi[3]: Creating...
+google_compute_instance.nifi[5]: Creating...
+google_compute_firewall.allow-https: Creation complete after 17s [id=allow-https]
+google_compute_firewall.allow-internal: Creation complete after 17s [id=allow-internal]
+google_compute_instance.nifi[2]: Creation complete after 7s [id=nifi-3]
+google_compute_instance.nifi[4]: Still creating... [10s elapsed]
+google_compute_instance.nifi[0]: Still creating... [10s elapsed]
+google_compute_instance.nifi[3]: Still creating... [10s elapsed]
+google_compute_instance.nifi[1]: Still creating... [10s elapsed]
+google_compute_instance.nifi[5]: Still creating... [10s elapsed]
+google_compute_instance.nifi[1]: Creation complete after 11s [id=nifi-2]
+google_compute_instance.nifi[5]: Creation complete after 11s [id=nifi-6]
+google_compute_instance.nifi[0]: Creation complete after 12s [id=nifi-1]
+google_compute_instance.nifi[4]: Creation complete after 12s [id=nifi-5]
+google_compute_instance.nifi[3]: Creation complete after 12s [id=nifi-4]
+google_compute_instance_group.nifi-ig: Creating...
+google_compute_instance_group.nifi-ig: Creation complete after 7s [id=europe-west1-d/nifi-ig]
+google_compute_backend_service.nifi-backend: Creating...
+google_compute_backend_service.nifi-backend: Creation complete after 9s [id=nifi-backend]
+google_compute_url_map.nifi-url-map: Creating...
+google_compute_url_map.nifi-url-map: Creation complete after 4s [id=nifi-url-map]
+google_compute_target_https_proxy.nifi-target-proxy: Creating...
+google_compute_target_https_proxy.nifi-target-proxy: Creation complete after 4s [id=nifi-target-proxy]
+google_compute_global_forwarding_rule.nifi-lb: Creating...
+google_compute_global_forwarding_rule.nifi-lb: Still creating... [10s elapsed]
+google_compute_global_forwarding_rule.nifi-lb: Creation complete after 17s [id=nifi-lb]
+
+Apply complete! Resources: 17 added, 0 changed, 0 destroyed.
+Removing gs://nifi_bin/key.pem...
+/ [1 objects]
+Operation completed over 1 objects.
+Removing gs://nifi_bin/certs.pem...
+/ [1 objects]
+Operation completed over 1 objects.
+````
 
 <figcaption>
 
