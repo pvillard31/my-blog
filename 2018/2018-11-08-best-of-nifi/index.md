@@ -21,7 +21,7 @@ A lot of very good stuff about NiFi is all over the internet: a lot of posts, vi
 - [Load-balancing with Site-to-Site](https://community.hortonworks.com/articles/109629/how-to-achieve-better-load-balancing-using-nifis-s.html)
 - [Load-balanced connections](https://blogs.apache.org/nifi/entry/load-balancing-across-the-cluster) (+ [here](https://pierrevillard.com/2018/10/29/nifi-1-8-revolutionizing-the-list-fetch-pattern-and-more/))
 - [Component versioning](https://bryanbende.com/development/2017/05/10/apache-nifi-1-2-0-component-versioning)
-- [Component class loading](http://Apache NiFi - Class Loading)
+- [Component class loading](https://bryanbende.com/development/2016/11/24/apache-nifi-class-loading)
 - [Process group variables](https://community.hortonworks.com/articles/155823/introduction-into-process-group-variables.html)
 
 ## NiFi installation and deployment
